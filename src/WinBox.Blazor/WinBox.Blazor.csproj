@@ -1,0 +1,53 @@
+<Project Sdk="Microsoft.NET.Sdk.Razor">
+
+  <PropertyGroup>
+    <TargetFramework>net8.0</TargetFramework>
+    <Nullable>enable</Nullable>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <ApplicationIcon>winbox-logo.ico</ApplicationIcon>
+    <Title>WinBox.js for blazor!</Title>
+    <Version>0.2.82</Version>
+    <Company>BenDerPan</Company>
+    <Description>WinBox.js for blazor!</Description>
+    <PackageProjectUrl>https://github.com/BenDerPan/WinBox.Blazor</PackageProjectUrl>
+    <PackageIcon>winbox-logo.jpg</PackageIcon>
+    <PackageReadmeFile>README.md</PackageReadmeFile>
+    <RepositoryUrl>https://github.com/BenDerPan/WinBox.Blazor</RepositoryUrl>
+    <RepositoryType>github</RepositoryType>
+    <PackageTags>WinBox.js dotnet Blazor</PackageTags>
+    <PackageLicenseFile>LICENSE</PackageLicenseFile>
+    <RootNamespace>WinBox</RootNamespace>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <Content Include="winbox-logo.ico" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Include="..\..\LICENSE">
+      <Pack>True</Pack>
+      <PackagePath>\</PackagePath>
+    </None>
+    <None Include="..\..\README.md">
+      <Pack>True</Pack>
+      <PackagePath>\</PackagePath>
+    </None>
+  </ItemGroup>
+
+
+  <ItemGroup>
+    <SupportedPlatform Include="browser" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Microsoft.AspNetCore.Components.Web" Version="8.0.1" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Update="winbox-logo.jpg">
+      <Pack>True</Pack>
+      <PackagePath>\</PackagePath>
+    </None>
+  </ItemGroup>
+
+</Project>

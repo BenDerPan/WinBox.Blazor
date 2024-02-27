@@ -1,0 +1,73 @@
+﻿<Window>
+    <div>
+        <button @onclick="@Minimize" class="btn btn-primary m-2">最小化</button>
+        <button @onclick="@Maximize" class="btn btn-danger m-2">最大化 (Toggle)</button>
+        <button @onclick="@Fullscreen" class="btn btn-info m-2">全屏 (Toggle)</button>
+        <button @onclick="@Restore" class="btn btn-dark m-2">恢复</button>
+        <button @onclick="@Resize" class="btn btn-light m-2">设置大小 (50%, 50%)</button>
+        <button @onclick="@SetTitle" class="btn btn-secondary m-2">设置标题</button>
+        <button @onclick="@SetBackground" class="btn btn-success m-2">设置颜色(随机)</button>
+        <button @onclick="@Close" class="btn btn-warning m-2">关闭</button>
+        <button @onclick="@Move" class="btn btn-primary m-2">居中</button>
+    </div>
+</Window>
+@code {
+    [CascadingParameter] public WindowInstance WindowInstance { get; set; }
+
+    private int _Coutner = 0;
+    private bool _IsFullScreen;
+    private bool _IsMax;
+
+    string GetRandomBackground()
+    {
+        Random random = new Random();
+        return $"rgb({random.Next(0, 256)},{random.Next(0, 256)},{random.Next(0, 256)})";
+    }
+
+    private void Minimize()
+    {
+        WindowInstance.Minimize();
+    }
+
+    private void Maximize()
+    {
+        _IsMax = !_IsMax;
+        WindowInstance.Maximize(_IsMax);
+    }
+
+    private void Fullscreen()
+    {
+        _IsFullScreen = !_IsFullScreen;
+        WindowInstance.Fullscreen(_IsFullScreen);
+    }
+
+    private void Restore()
+    {
+        WindowInstance.Restore();
+    }
+
+    private void Resize()
+    {
+        WindowInstance.Resize("50%", "50%");
+    }
+
+    private void SetTitle()
+    {
+        WindowInstance.SetTitle($"新标题 {++_Coutner}");
+    }
+
+    private void SetBackground()
+    {
+        WindowInstance.SetBackground(GetRandomBackground());
+    }
+
+    private void Close()
+    {
+        WindowInstance.CloseAsync();
+    }
+
+    private void Move()
+    {
+        WindowInstance.Move("center", "center");
+    }
+}

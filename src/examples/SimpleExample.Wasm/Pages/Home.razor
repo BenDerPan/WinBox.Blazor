@@ -1,0 +1,41 @@
+﻿@using WinBox;
+@using SimpleExample.Wasm.Windows;
+
+@page "/"
+
+<PageTitle>主页</PageTitle>
+
+<button class="btn btn-primary m-2" @onclick="@OpenOptionsWindow">打开配置窗口</button>
+
+<div class="input-group m-2" style="width: 349px;">
+    <input @bind-value="_InitialCount" type="number" class="form-control" placeholder="初始计数" aria-describedby="button-open">
+    <button @onclick="@OpenWindowWithResultAsync" class="btn btn-outline-secondary" type="button" id="button-open">打开结果窗体</button>
+</div>
+
+
+@code{
+    [Inject] public IWindowManager WindowManager { get; set; }
+
+    private int _InitialCount = 0;
+    private async Task OpenWindowWithResultAsync()
+    {
+        //You can create parameters like this
+        //WindowParameters xWindowParameters = new()
+        //{
+        //    { nameof(ReturnValueWindow.CurrentCount), _InitialCount }
+        //};
+        //Or like this
+        WindowParameters xWindowParameters = new();
+        xWindowParameters.Add(nameof(ReturnValueWindow.CurrentCount), _InitialCount);
+
+        WindowOptions xWindowOptions = new() { Height = "400px", Width = "350px" };
+
+        var xCurrentCounter = await WindowManager.OpenReValAsync<ReturnValueWindow>("结果窗体", xWindowParameters, xWindowOptions);
+
+        Console.WriteLine($"当前计数值: {xCurrentCounter}");
+    }
+    private void OpenOptionsWindow()
+    {
+        WindowManager.Open<OptionsWindow>("配置窗口");
+    }
+}

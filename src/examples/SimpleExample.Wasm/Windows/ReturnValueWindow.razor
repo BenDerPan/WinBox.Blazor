@@ -1,0 +1,29 @@
+﻿<Window Title="当前窗体">
+    <h1>计数</h1>
+
+    <p role="status">当前计数值: @_CurrentCount</p>
+
+    <button class="btn btn-primary" @onclick="IncrementCount">点击我</button>
+    <button class="btn btn-dark" @onclick="@ReturnCurrentValueAsync">返回当前值</button>
+</Window>
+@code {
+    [Parameter] public int CurrentCount { get; set; }
+    [CascadingParameter] public WindowInstance WindowInstance { get; set; }
+
+    private int _CurrentCount;
+
+    protected override void OnInitialized()
+    {
+        _CurrentCount = CurrentCount;
+    }
+
+    private void IncrementCount()
+    {
+        _CurrentCount++;
+    }
+
+    private async Task ReturnCurrentValueAsync()
+    {
+        await WindowInstance.CloseAsync(WindowResult.Ok(_CurrentCount));
+    }
+}
